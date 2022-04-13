@@ -1,0 +1,28 @@
+{
+    "name": "flightbooking",
+    "version": "0.0.1",
+    "description": "A Fiori application.",
+    "keywords": [
+        "ui5",
+        "openui5",
+        "sapui5"
+    ],
+    "main": "index.html",
+    "scripts": {
+        "build": "npm run clean && npm run zip",
+        "zip": "tar.exe -acf manifest-bundle.zip manifest.json && tar.exe -acf flightbooking-html5.zip *",
+        "clean": "npx rimraf flightbooking-html5.zip manifest-bundle.zip"
+    },
+    "devDependencies": {
+        "@sap/ui5-builder-webide-extension": "1.0.x",
+        "ui5-task-zipper": "^0.3.1",
+        "mbt": "^1.0.15"
+    },
+    "ui5": {
+        "dependencies": [
+            "@sap/ui5-builder-webide-extension",
+            "ui5-task-zipper",
+            "mbt"
+        ]
+    }
+}

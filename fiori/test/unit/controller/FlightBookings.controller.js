@@ -1,0 +1,1 @@
+sap.ui.define(["FlightBookings/workshop./controller/FlightBookings.controller"],function(o){"use strict";QUnit.module("FlightBookings Controller");QUnit.test("I should test the FlightBookings controller",function(t){var n=new o;n.onInit();t.ok(n)})});

@@ -1,0 +1,89 @@
+_schema-version: "3.2"
+ID: flightbooking
+version: 0.0.1
+modules:
+- name: flightbooking-html5
+  type: html5
+  path: fiori
+  build-parameters:
+    build-result: .
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: flightbooking-ui-deployer
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: flightbooking-html5repo
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - flightbooking-html5.zip
+      name: flightbooking-html5
+      target-path: resources/
+- name: flightbooking-dest-content
+  type: com.sap.application.content
+  requires:
+  - name: flightbooking-uaa
+    parameters:
+      service-key:
+        name: flightbooking-uaa-sk
+  - name: flightbooking-dest
+    parameters:
+      content-target: true
+  - name: flightbooking-html5repo
+    parameters:
+      service-key:
+        name: flightbooking-html5repo-sk
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Authentication: OAuth2UserTokenExchange
+          Name: flightbooking-service-flightbooking-uaa
+          ServiceInstanceName: flightbooking-uaa
+          ServiceKeyName: flightbooking-uaa-sk
+          sap.cloud.service: flightbooking-service
+        - Name: flightbooking-service-flightbooking-html5repo
+          ServiceInstanceName: flightbooking-html5repo
+          ServiceKeyName: flightbooking-html5repo-sk
+          sap.cloud.service: flightbooking-service
+        existing_destinations_policy: update
+  build-parameters:
+    no-source: true
+resources:
+- name: flightbooking-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-plan: application
+- name: flightbooking-dest
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-plan: lite
+- name: flightbooking-html5repo
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-host
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
