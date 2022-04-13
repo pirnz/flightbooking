@@ -11,7 +11,7 @@
     "scripts": {
         "build": "npm run clean && npm run zip",
         "zip": "tar.exe -acf manifest-bundle.zip manifest.json && tar.exe -acf flightbooking-html5.zip *",
-        "clean": "npx rimraf flightbooking-html5.zip manifest-bundle.zip"
+        "clean": "rm flightbooking-html5.zip manifest-bundle.zip"
     },
     "devDependencies": {
         "@sap/ui5-builder-webide-extension": "1.0.x",
