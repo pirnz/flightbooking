@@ -4,12 +4,13 @@ version: 0.0.1
 modules:
 - name: flightbooking-html5
   type: html5
-  path: fiori
+  path: app
   build-parameters:
-    build-result: .
+    build-result: dist
     builder: custom
     commands:
-    - npm run build
+    - npm install
+    - npm run build:cf
     supported-platforms: []
 - name: flightbooking-ui-deployer
   type: com.sap.application.content

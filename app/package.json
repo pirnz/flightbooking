@@ -9,13 +9,15 @@
     ],
     "main": "index.html",
     "scripts": {
-        "build": "npm run clean && npm run zip",
-        "zip": "npm run zip:manifest && npm run zip:html5",
-        "zip:manifest": "bestzip manifest-bundle.zip manifest.json",
-        "zip:html5": "bestzip flightbooking-html5.zip ./*",
-        "clean": "rm -f flightbooking-html5.zip manifest-bundle.zip"
+        "deploy-config": "npx -p @sap/ux-ui5-tooling fiori add deploy-config cf",
+        "build:cf": "ui5 build preload --clean-dest --config ui5-deploy.yaml --include-task=generateManifestBundle generateCachebusterInfo"
     },
     "devDependencies": {
+        "@ui5/cli": "^2.11.1",
+        "@ui5/fs": "^2.0.6",
+        "@ui5/logger": "^2.0.1",
+        "@sap/ux-ui5-tooling": "1",
+        "rimraf": "3.0.2",
         "@sap/ui5-builder-webide-extension": "1.0.x",
         "ui5-task-zipper": "^0.3.1",
         "mbt": "^1.0.15"
