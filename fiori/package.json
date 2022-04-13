@@ -10,7 +10,7 @@
     "main": "index.html",
     "scripts": {
         "build": "npm run clean && npm run zip",
-        "zip": "tar.exe -acf manifest-bundle.zip manifest.json && tar.exe -acf flightbooking-html5.zip *",
+        "zip": "tar -acf manifest-bundle.zip manifest.json && tar -acf flightbooking-html5.zip *",
         "clean": "rm -f flightbooking-html5.zip manifest-bundle.zip"
     },
     "devDependencies": {
