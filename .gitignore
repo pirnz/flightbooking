@@ -3,3 +3,4 @@ resources/
 *.mta
 *.zip
 node_modules/
+dist/
