@@ -20,6 +20,6 @@ builder:
   - name: ui5-task-zipper
     afterTask: generateCachebusterInfo
     configuration:
-      archiveName: flightbooking
+      archiveName: flightbooking-html5
       additionalFiles:
       - xs-app.json
